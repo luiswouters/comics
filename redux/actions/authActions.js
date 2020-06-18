@@ -1,12 +1,9 @@
 import * as types from "../types";
 import axios from "axios";
+import { statusShow, cleanStatus } from "./statusActions";
 
 export function tryAuthenticateSuccess(user) {
   return { type: types.TRY_AUTHENTICATE_SUCCESS, user };
-}
-
-export function tryAuthenticateError(user) {
-  return { type: types.TRY_AUTHENTICATE_ERROR };
 }
 
 export function logoutSuccess() {
@@ -21,6 +18,7 @@ export function logout() {
 
 export function tryAuthenticate(credentials) {
   return function (dispatch) {
+    dispatch(cleanStatus());
     return axios
       .get("/users.json")
       .then((response) => {
@@ -32,11 +30,15 @@ export function tryAuthenticate(credentials) {
         if (user !== undefined) {
           dispatch(tryAuthenticateSuccess(user));
         } else {
-          dispatch(tryAuthenticateError(response.data.data.results));
+          dispatch(
+            statusShow(
+              "We coudn't find your e-mail or the password is incorrect."
+            )
+          );
         }
       })
       .catch((error) => {
-        console.log(error);
+        dispatch(statusShow("We coudn't process your request."));
       });
   };
 }

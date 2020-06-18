@@ -7,6 +7,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LoginForm({ onSubmit, onChange }) {
+function LoginForm({ onSubmit, onChange, error }) {
   const classes = useStyles();
 
   return (
@@ -66,6 +67,7 @@ function LoginForm({ onSubmit, onChange }) {
             autoComplete="current-password"
             onChange={onChange}
           />
+          {error !== "" && <Alert severity="error">{error}</Alert>}
           <Button
             type="submit"
             fullWidth
@@ -84,6 +86,7 @@ function LoginForm({ onSubmit, onChange }) {
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  error: PropTypes.string.isRequired,
 };
 
 export default LoginForm;

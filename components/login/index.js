@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { tryAuthenticate } from "../../redux/actions/authActions";
 import LoginForm from "./loginForm";
 
-function Login({ authentication, tryAuthenticate }) {
+function Login({ authentication, tryAuthenticate, status }) {
   const [credentials, setCredentials] = useState({});
 
   function handleSubmit(event) {
@@ -19,12 +19,15 @@ function Login({ authentication, tryAuthenticate }) {
     }));
   }
 
-  return <LoginForm onSubmit={handleSubmit} onChange={handleChange} />;
+  return (
+    <LoginForm onSubmit={handleSubmit} onChange={handleChange} error={status} />
+  );
 }
 
 function mapStateToProps(state, ownProps) {
   return {
     authentication: state.authentication,
+    status: state.status,
   };
 }
 
