@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -48,6 +49,11 @@ const useStyles = makeStyles((theme) => ({
 function Login() {
   const classes = useStyles();
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    alert("ha");
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -58,7 +64,7 @@ function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
