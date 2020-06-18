@@ -1,7 +1,5 @@
 import * as types from "../types";
 import axios from "axios";
-//import * as courseApi from "../../api/courseApi";
-//import { beginApiCall, apiCallError } from "./apiStatusActions";
 
 export function loadComicsSuccess(comics) {
   return { type: types.LOAD_COMICS_SUCCESS, comics };

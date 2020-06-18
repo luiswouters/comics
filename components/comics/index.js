@@ -12,11 +12,17 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { loadComics } from "../../redux/actions/comicsActions";
+import { logout } from "../../redux/actions/authActions";
 import { connect } from "react-redux";
 import ComicsList from "./comicsList";
 
-function Comics({ loadComics, comics, user }) {
+function Comics({ loadComics, comics, user, logout }) {
   const [list, setList] = useState([]);
+
+  function logoutFunc(event) {
+    event.preventDefault();
+    logout();
+  }
 
   useEffect(() => {
     if (comics.length === 0) {
@@ -28,7 +34,7 @@ function Comics({ loadComics, comics, user }) {
     }
   }, [comics]);
 
-  return <ComicsList list={list} user={user} />;
+  return <ComicsList list={list} user={user} logoutFunc={logoutFunc} />;
 }
 
 function mapStateToProps(state, ownProps) {
@@ -40,6 +46,7 @@ function mapStateToProps(state, ownProps) {
 
 const mapDispatchToProps = {
   loadComics,
+  logout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comics);

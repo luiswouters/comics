@@ -9,6 +9,17 @@ export function tryAuthenticateError(user) {
   return { type: types.TRY_AUTHENTICATE_ERROR };
 }
 
+export function logoutSuccess() {
+  console.log("bom");
+  return { type: types.LOGOUT_SUCCESS, user: {} };
+}
+
+export function logout() {
+  return function (dispatch) {
+    return dispatch(logoutSuccess());
+  };
+}
+
 export function tryAuthenticate(credentials) {
   return function (dispatch) {
     console.log(credentials.email);

@@ -1,7 +1,4 @@
 export default {
-  authentication: {
-    token: null,
-    user: null,
-  },
+  authentication: null,
   comics: [],
 };

@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Comics({ list, user }) {
+function Comics({ list, user, logoutFunc }) {
   const classes = useStyles();
 
   return (
@@ -89,6 +89,7 @@ function Comics({ list, user }) {
             color="primary"
             variant="outlined"
             className={classes.link}
+            onClick={logoutFunc}
           >
             Logout
           </Button>
@@ -139,6 +140,7 @@ function Comics({ list, user }) {
 Comics.propTypes = {
   list: PropTypes.array.isRequired,
   user: PropTypes.object.isRequired,
+  logoutFunc: PropTypes.func.isRequired,
 };
 
 export default Comics;

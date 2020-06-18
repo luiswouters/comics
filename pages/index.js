@@ -11,7 +11,7 @@ function Home({ authentication }) {
         <title>Comics List</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>{authentication.user === null ? <Login /> : <Comics />}</main>
+      <main>{authentication === null ? <Login /> : <Comics />}</main>
     </div>
   );
 }
