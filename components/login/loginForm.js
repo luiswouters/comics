@@ -39,7 +39,7 @@ function LoginForm({ onSubmit, onChange }) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Hero sign in
         </Typography>
         <form className={classes.form} noValidate onSubmit={onSubmit}>
           <TextField
