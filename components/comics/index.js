@@ -11,7 +11,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { loadComics } from "../redux/actions/comicsActions";
+import { loadComics } from "../../redux/actions/comicsActions";
 import { connect } from "react-redux";
 
 function createData(id, date, name, shipTo, paymentMethod, amount) {
