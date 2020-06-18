@@ -15,6 +15,7 @@ export function loadComics() {
       )
       .then((response) => {
         console.log(response);
+        const comics = [];
         dispatch(loadComicsSuccess(response.data.data.results));
       })
       .catch((error) => {
