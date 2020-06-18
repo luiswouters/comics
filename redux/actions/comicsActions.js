@@ -7,12 +7,12 @@ export function loadComicsSuccess(comics) {
 }
 
 export function unloadComicsSuccess() {
-  return { type: types.LOAD_COMICS_SUCCESS, comics: initialState.comics };
+  return { type: types.UNLOAD_COMICS_SUCCESS };
 }
 
 export function unloadComics() {
   return function (dispatch) {
-    return dispatch(unloadComicsSuccess);
+    return dispatch(unloadComicsSuccess());
   };
 }
 

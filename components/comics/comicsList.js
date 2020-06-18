@@ -116,7 +116,6 @@ function Comics({ list, user, logoutFunc }) {
                 } else {
                   url = "https://www.marvel.com/";
                 }
-                console.log(findUrl);
                 return (
                   <TableRow key={comic.id}>
                     <TableCell>

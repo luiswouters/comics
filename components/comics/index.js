@@ -4,9 +4,7 @@ import { logout } from "../../redux/actions/authActions";
 import { connect } from "react-redux";
 import ComicsList from "./comicsList";
 
-function Comics({ loadComics, comics, user, logout }) {
-  const [list, setList] = useState([]);
-
+function Comics({ loadComics, comics, user, logout, unloadComics }) {
   function logoutFunc(event) {
     event.preventDefault();
     logout();
@@ -18,12 +16,10 @@ function Comics({ loadComics, comics, user, logout }) {
       loadComics(user.heroId).catch((error) => {
         alert("Loading comics failed:" + error);
       });
-    } else {
-      setList(comics);
     }
   }, [comics, user]);
 
-  return <ComicsList list={list} user={user} logoutFunc={logoutFunc} />;
+  return <ComicsList list={comics} user={user} logoutFunc={logoutFunc} />;
 }
 
 function mapStateToProps(state, ownProps) {
@@ -36,6 +32,7 @@ function mapStateToProps(state, ownProps) {
 const mapDispatchToProps = {
   loadComics,
   logout,
+  unloadComics,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comics);

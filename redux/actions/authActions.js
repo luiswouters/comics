@@ -7,7 +7,7 @@ export function tryAuthenticateSuccess(user) {
 }
 
 export function logoutSuccess() {
-  return { type: types.LOGOUT_SUCCESS, user: {} };
+  return { type: types.LOGOUT_SUCCESS };
 }
 
 export function logout() {
