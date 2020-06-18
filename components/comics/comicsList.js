@@ -166,7 +166,13 @@ function Comics({ list, user }) {
                     )}
                   </TableCell>
                   <TableCell>{comic.title}</TableCell>
-                  <TableCell>{{ __html: comic.description }}</TableCell>
+                  <TableCell>
+                    {comic.description && (
+                      <div
+                        dangerouslySetInnerHTML={{ __html: comic.description }}
+                      />
+                    )}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
