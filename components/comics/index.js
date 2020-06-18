@@ -120,6 +120,7 @@ function Comics({ loadComics, comics }) {
         alert("Loading courses failed:" + error);
       });
     } else {
+      console.log(comics);
       setComicsList({ ...comics });
     }
   }, [comics]);
@@ -156,7 +157,7 @@ function Comics({ loadComics, comics }) {
         </Toolbar>
       </AppBar>
       <Container>
-        <h1>BsOi</h1>
+        <h1>{comics && comics[0] && comics[0].id ? comics[0].id : ""}</h1>
         <Paper className={classes.paper}>
           <Table size="small">
             <TableHead>

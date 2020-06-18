@@ -1,7 +1,7 @@
 import { AUTHENTICATE, DEAUTHENTICATE, USER } from "../types";
 import initialState from "./initialState";
 
-export default (state = initialState.auth, action) => {
+export default (state = initialState.authentication, action) => {
   switch (action.type) {
     case AUTHENTICATE:
       return Object.assign({}, state, { token: action.payload });
