@@ -1,46 +1,33 @@
-import Router from "next/router";
+import * as types from "../types";
 import axios from "axios";
-import { REGISTER, AUTHENTICATE, DEAUTHENTICATE } from "../types";
-import { API } from "../../config";
-import { setCookie, removeCookie } from "../../utils/cookie";
 
-// register user
-const register = (
-  { firstname, lastname, mobile_no, email_id, password, confirm_password },
-  type
-) => {
-  if (type !== "register") {
-    throw new Error("Wrong API call!");
-  }
-  return (dispatch) => {
-    axios
-      .post(`${API}/${type}`, {
-        firstname,
-        lastname,
-        mobile_no,
-        email_id,
-        password,
-        confirm_password,
-      })
+export function tryAuthenticateSuccess(user) {
+  return { type: types.TRY_AUTHENTICATE_SUCCESS, user };
+}
+
+export function tryAuthenticateError(user) {
+  return { type: types.TRY_AUTHENTICATE_ERROR };
+}
+
+export function tryAuthenticate(credentials) {
+  return function (dispatch) {
+    console.log(credentials.email);
+    return axios
+      .get("/users.json")
       .then((response) => {
-        Router.push("/signin");
-        console.log(response.data.meta.message);
-      })
-      .catch((err) => {
-        switch (error.response.status) {
-          case 422:
-            alert(error.response.data.meta.message);
-            break;
-          case 401:
-            alert(error.response.data.meta.message);
-            break;
-          case 500:
-            alert("Interval server error! Try again!");
-            break;
-          default:
-            alert(error.response.data.meta.message);
-            break;
+        const user = response.data.find(
+          (user) =>
+            user.email === credentials.email &&
+            user.password.toString() === credentials.password
+        );
+        if (user !== undefined) {
+          dispatch(tryAuthenticateSuccess(user));
+        } else {
+          dispatch(tryAuthenticateError(response.data.data.results));
         }
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
-};
+}
