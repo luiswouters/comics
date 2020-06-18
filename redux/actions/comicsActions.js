@@ -1,8 +1,19 @@
 import * as types from "../types";
 import axios from "axios";
+import initialState from "../reducers/initialState";
 
 export function loadComicsSuccess(comics) {
   return { type: types.LOAD_COMICS_SUCCESS, comics };
+}
+
+export function unloadComicsSuccess() {
+  return { type: types.LOAD_COMICS_SUCCESS, comics: initialState.comics };
+}
+
+export function unloadComics() {
+  return function (dispatch) {
+    return dispatch(unloadComicsSuccess);
+  };
 }
 
 export function loadComics(characterId) {

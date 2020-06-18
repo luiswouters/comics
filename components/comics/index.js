@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { loadComics } from "../../redux/actions/comicsActions";
+import { loadComics, unloadComics } from "../../redux/actions/comicsActions";
 import { logout } from "../../redux/actions/authActions";
 import { connect } from "react-redux";
 import ComicsList from "./comicsList";
@@ -10,6 +10,7 @@ function Comics({ loadComics, comics, user, logout }) {
   function logoutFunc(event) {
     event.preventDefault();
     logout();
+    unloadComics();
   }
 
   useEffect(() => {
