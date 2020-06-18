@@ -11,7 +11,6 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { loadComics } from "../../redux/actions/comicsActions";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -107,28 +106,52 @@ function Comics({ list, user, logoutFunc }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {list.map((comic) => (
-                <TableRow key={comic.id}>
-                  <TableCell>
-                    {comic.thumbnail && (
-                      <img
-                        src={
-                          comic.thumbnail.path + "." + comic.thumbnail.extension
-                        }
-                        width="100"
-                      />
-                    )}
-                  </TableCell>
-                  <TableCell>{comic.title}</TableCell>
-                  <TableCell>
-                    {comic.description && (
-                      <div
-                        dangerouslySetInnerHTML={{ __html: comic.description }}
-                      />
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
+              {list.map((comic) => {
+                let url;
+                const findUrl = comic.urls.filter(
+                  (url) => url.type === "detail"
+                );
+                if (findUrl.length > 0) {
+                  url = findUrl[0].url;
+                } else {
+                  url = "https://www.marvel.com/";
+                }
+                console.log(findUrl);
+                return (
+                  <TableRow key={comic.id}>
+                    <TableCell>
+                      {comic.thumbnail && (
+                        <Link href={url} target="_blank">
+                          <img
+                            src={
+                              comic.thumbnail.path +
+                              "." +
+                              comic.thumbnail.extension
+                            }
+                            width="100"
+                          />
+                        </Link>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      <Link href={url} target="_blank">
+                        {comic.title}
+                      </Link>
+                    </TableCell>
+                    <TableCell>
+                      {comic.description && (
+                        <Link href={url} target="_blank">
+                          <span
+                            dangerouslySetInnerHTML={{
+                              __html: comic.description,
+                            }}
+                          />
+                        </Link>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </Paper>
