@@ -10,7 +10,6 @@ export function tryAuthenticateError(user) {
 }
 
 export function logoutSuccess() {
-  console.log("bom");
   return { type: types.LOGOUT_SUCCESS, user: {} };
 }
 
@@ -22,7 +21,6 @@ export function logout() {
 
 export function tryAuthenticate(credentials) {
   return function (dispatch) {
-    console.log(credentials.email);
     return axios
       .get("/users.json")
       .then((response) => {

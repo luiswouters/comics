@@ -9,7 +9,6 @@ export default function authReducer(
     case types.TRY_AUTHENTICATE_SUCCESS:
       return action.user;
     case types.LOGOUT_SUCCESS:
-      console.log(action.user);
       return null;
     default:
       return state;
